@@ -1,0 +1,68 @@
+<app-adminnavbar></app-adminnavbar>
+
+<main class="page">
+  <div class="page-head">
+    <div class="page-head-copy">
+      <span class="eyebrow">Candidate pipeline</span>
+      <h1>Applications</h1>
+      <p>Review applicant details and move each candidate through the recruitment process.</p>
+    </div>
+    <span class="count-badge" *ngIf="applications.length > 0">{{applications.length}} candidate{{applications.length === 1 ? '' : 's'}}</span>
+  </div>
+
+  <section class="table-wrap" *ngIf="applications.length > 0">
+    <div class="table-scroll">
+      <table class="grid">
+        <thead>
+          <tr>
+            <th>Reference</th>
+            <th>Applicant</th>
+            <th>Contact</th>
+            <th>Job</th>
+            <th>Type</th>
+            <th>Applied on</th>
+            <th>Status</th>
+            <th>Resume</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of applications; let i = index">
+            <td>#{{i + 1}}</td>
+            <td>
+              <strong>{{item.applicant?.applicantName}}</strong>
+              <span class="table-subtext">{{item.applicant?.email}}</span>
+            </td>
+            <td>{{item.applicant?.contactNumber}}</td>
+            <td><strong>{{item.job?.jobTitle}}</strong></td>
+            <td><span class="chip" [ngClass]="item.job?.category?.toLowerCase()">{{item.job?.category}}</span></td>
+            <td>{{item.appliedDate}}</td>
+            <td>
+              <select class="table-select"
+                      [ngModel]="item.selectedStatus"
+                      name="status-{{item.id}}"
+                      (ngModelChange)="changeStatus(item, $event)"
+                      [disabled]="updatingId === item.id">
+                <option *ngFor="let b of status" [value]="b">{{b}}</option>
+              </select>
+              <span *ngIf="updatingId === item.id" class="form-text">Updating status...</span>
+            </td>
+            <td>
+              <button *ngIf="item.applicant?.resumeFileName" class="btn btn-outline btn-sm" type="button" (click)="viewResume(item)">View resume</button>
+              <span *ngIf="!item.applicant?.resumeFileName" class="table-subtext">No resume</span>
+            </td>
+            <td><button class="btn btn-danger btn-sm" type="button" (click)="delete(item.id)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="empty-state" *ngIf="applications.length === 0">
+    <div class="empty-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M19 8v6"></path><path d="M22 11h-6"></path></svg>
+    </div>
+    <h3>No applications received yet</h3>
+    <p>New candidates will appear here after they submit an application.</p>
+  </section>
+</main>

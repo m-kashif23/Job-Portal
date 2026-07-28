@@ -1,0 +1,57 @@
+<app-adminnavbar></app-adminnavbar>
+
+<main class="page landing">
+  <section class="dashboard-hero">
+    <div>
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Recruitment control centre</div>
+      <h1>Manage every hiring workflow from one place.</h1>
+      <p>Create polished job postings, review incoming applicants, update statuses and maintain payment records with less friction.</p>
+      <div class="actions">
+        <a routerLink="/managejob" class="btn btn-primary">
+          Create a new job
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+        </a>
+        <a routerLink="/adminapplication" class="btn btn-outline-light">Review applications</a>
+      </div>
+    </div>
+
+    <div class="dashboard-art" aria-hidden="true">
+      <div class="dashboard-orbit">
+        <div class="dashboard-orbit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m7 16 4-5 4 3 5-7"></path></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="action-grid" aria-label="Admin actions">
+    <a class="action-card" routerLink="/managejob">
+      <div class="action-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+      </div>
+      <div><h3>Publish a job</h3><p>Create a complete vacancy with department, location, deadline and category.</p></div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="action-card" routerLink="/edit">
+      <div class="action-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+      </div>
+      <div><h3>Manage listings</h3><p>Edit active postings, correct details or remove vacancies that have closed.</p></div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="action-card" routerLink="/payments">
+      <div class="action-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><path d="M2 10h20"></path></svg>
+      </div>
+      <div><h3>Review payments</h3><p>View premium application payments and keep transaction records organised.</p></div>
+      <span class="arrow">→</span>
+    </a>
+  </section>
+
+  <footer class="site-foot">
+    <span class="site-foot-brand"><span class="site-foot-dot"></span>Admin console</span>
+    <span>&copy; 2026 Job Portal. All rights reserved.</span>
+  </footer>
+</main>

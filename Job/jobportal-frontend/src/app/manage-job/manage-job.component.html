@@ -1,0 +1,96 @@
+<app-adminnavbar></app-adminnavbar>
+
+<main class="form-page">
+  <section class="form-card wide">
+    <div class="form-card-head">
+      <div class="form-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+      </div>
+      <div>
+        <h2>Create a job posting</h2>
+        <p class="sub">Add clear role details. The listing appears immediately in the category you select.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="manageForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <div>
+          <label for="jobTitle">Job title</label>
+          <input type="text" id="jobTitle" formControlName="jobTitle" placeholder="e.g. Business Analyst"
+                 [ngClass]="{ 'invalid-field': manageForm.get('jobTitle').invalid && manageForm.get('jobTitle').touched }">
+          <div class="err" *ngIf="manageForm.get('jobTitle').hasError('required') && manageForm.get('jobTitle').touched">Job title is required.</div>
+        </div>
+
+        <div>
+          <label for="department">Department</label>
+          <input type="text" id="department" formControlName="department" placeholder="e.g. Strategy & Operations"
+                 [ngClass]="{ 'invalid-field': manageForm.get('department').invalid && manageForm.get('department').touched }">
+          <div class="err" *ngIf="manageForm.get('department').hasError('required') && manageForm.get('department').touched">Department is required.</div>
+        </div>
+
+        <div>
+          <label for="location">Location</label>
+          <input type="text" id="location" formControlName="location" placeholder="e.g. Kuala Lumpur / Hybrid"
+                 [ngClass]="{ 'invalid-field': manageForm.get('location').invalid && manageForm.get('location').touched }">
+          <div class="err" *ngIf="manageForm.get('location').hasError('required') && manageForm.get('location').touched">Location is required.</div>
+        </div>
+
+        <div>
+          <label for="deadLine">Application deadline</label>
+          <input type="date" id="deadLine" formControlName="deadLine"
+                 [ngClass]="{ 'invalid-field': manageForm.get('deadLine').invalid && manageForm.get('deadLine').touched }">
+          <div class="err" *ngIf="manageForm.get('deadLine').hasError('required') && manageForm.get('deadLine').touched">Deadline is required.</div>
+        </div>
+
+        <div class="full form-section">
+          <div class="form-section-title">Role information</div>
+        </div>
+
+        <div class="full">
+          <label for="responsibility">Key responsibilities</label>
+          <textarea id="responsibility" formControlName="responsibility" placeholder="Describe the main outcomes and responsibilities for this role..."
+                    [ngClass]="{ 'invalid-field': manageForm.get('responsibility').invalid && manageForm.get('responsibility').touched }"></textarea>
+          <div class="err" *ngIf="manageForm.get('responsibility').hasError('required') && manageForm.get('responsibility').touched">Responsibility is required.</div>
+        </div>
+
+        <div class="full">
+          <label for="qualification">Required qualifications</label>
+          <textarea id="qualification" formControlName="qualification" placeholder="List the essential experience, skills and qualifications..."
+                    [ngClass]="{ 'invalid-field': manageForm.get('qualification').invalid && manageForm.get('qualification').touched }"></textarea>
+          <div class="err" *ngIf="manageForm.get('qualification').hasError('required') && manageForm.get('qualification').touched">Qualification is required.</div>
+        </div>
+
+        <div class="full form-section">
+          <div class="form-section-title">Category and fee</div>
+        </div>
+
+        <div>
+          <label for="category">Job category</label>
+          <select id="category" formControlName="category"
+                  [ngClass]="{ 'invalid-field': manageForm.get('category').invalid && manageForm.get('category').touched }">
+            <option value="" disabled>Select a category</option>
+            <option value="free">Free</option>
+            <option value="premium">Premium</option>
+          </select>
+          <div class="err" *ngIf="manageForm.get('category').hasError('required') && manageForm.get('category').touched">Category is required.</div>
+        </div>
+
+        <div>
+          <label for="applicationFee">Application fee</label>
+          <input type="number" id="applicationFee" formControlName="applicationFee" placeholder="Enter the fee amount"
+                 [ngClass]="{ 'invalid-field': manageForm.get('applicationFee').invalid && manageForm.get('applicationFee').touched }">
+          <div class="form-text" *ngIf="manageForm.get('category').value === 'free'">Free jobs have no application fee.</div>
+          <div class="err" *ngIf="manageForm.get('applicationFee').invalid && manageForm.get('applicationFee').touched">A fee of 0 or more is required.</div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!manageForm.valid" class="btn btn-primary">
+          Publish job
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </button>
+        <button type="button" (click)="onCancel()" class="btn btn-ghost">Clear form</button>
+      </div>
+    </form>
+  </section>
+</main>

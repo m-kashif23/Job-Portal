@@ -1,0 +1,82 @@
+<app-usernavbar></app-usernavbar>
+
+<main class="form-page">
+  <section class="form-card">
+    <div class="form-card-head">
+      <div class="form-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+      </div>
+      <div>
+        <h2>Your profile</h2>
+        <p class="sub">Update your name and phone number, or change your password.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+      <label for="email">Email address</label>
+      <input type="email" id="email" [value]="email" disabled>
+      <div class="form-text">This is fixed to the email you signed in with.</div>
+
+      <label for="username">Name</label>
+      <input type="text" id="username" formControlName="username" placeholder="Your name" autocomplete="name"
+             [ngClass]="{ 'invalid-field': profileForm.get('username').invalid && profileForm.get('username').touched }">
+      <div class="err" *ngIf="profileForm.get('username').hasError('required') && profileForm.get('username').touched">Name is required.</div>
+
+      <label for="mobileNumber">Phone number</label>
+      <input type="tel" id="mobileNumber" formControlName="mobileNumber" placeholder="e.g. +60123456789" autocomplete="tel"
+             [ngClass]="{ 'invalid-field': profileForm.get('mobileNumber').invalid && profileForm.get('mobileNumber').touched }">
+      <div class="err" *ngIf="profileForm.get('mobileNumber').hasError('required') && profileForm.get('mobileNumber').touched">Phone number is required.</div>
+      <div class="err" *ngIf="profileForm.get('mobileNumber').hasError('pattern') && profileForm.get('mobileNumber').touched">Enter 9–12 digits, optionally with a country code.</div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!profileForm.valid" class="btn btn-primary grow">Save changes</button>
+      </div>
+
+      <div class="alert-success" *ngIf="profileSuccess">Profile updated successfully.</div>
+      <div class="alert-error" *ngIf="profileError">{{profileError}}</div>
+    </form>
+  </section>
+
+  <section class="form-card">
+    <div class="form-card-head">
+      <div class="form-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      </div>
+      <div>
+        <h2>Change password</h2>
+        <p class="sub">You'll need your current password to set a new one.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+      <label for="currentPassword">Current password</label>
+      <input type="password" id="currentPassword" formControlName="currentPassword" placeholder="Enter your current password" autocomplete="current-password"
+             [ngClass]="{ 'invalid-field': passwordForm.get('currentPassword').invalid && passwordForm.get('currentPassword').touched }">
+      <div class="err" *ngIf="passwordForm.get('currentPassword').hasError('required') && passwordForm.get('currentPassword').touched">Current password is required.</div>
+
+      <div class="form-grid">
+        <div>
+          <label for="newPassword">New password</label>
+          <input type="password" id="newPassword" formControlName="newPassword" placeholder="At least 8 characters" autocomplete="new-password"
+                 [ngClass]="{ 'invalid-field': passwordForm.get('newPassword').invalid && passwordForm.get('newPassword').touched }">
+          <div class="err" *ngIf="passwordForm.get('newPassword').hasError('required') && passwordForm.get('newPassword').touched">New password is required.</div>
+          <div class="err" *ngIf="passwordForm.get('newPassword').hasError('minlength') && passwordForm.get('newPassword').touched">Must be at least 8 characters.</div>
+        </div>
+
+        <div>
+          <label for="confirmNewPassword">Confirm new password</label>
+          <input type="password" id="confirmNewPassword" formControlName="confirmNewPassword" placeholder="Repeat new password" autocomplete="new-password"
+                 [ngClass]="{ 'invalid-field': passwordForm.hasError('mismatch') && passwordForm.get('confirmNewPassword').touched }">
+          <div class="err" *ngIf="passwordForm.hasError('mismatch') && passwordForm.get('confirmNewPassword').touched">Passwords do not match.</div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!passwordForm.valid" class="btn btn-primary grow">Change password</button>
+      </div>
+
+      <div class="alert-success" *ngIf="passwordSuccess">Password changed successfully.</div>
+      <div class="alert-error" *ngIf="passwordError">{{passwordError}}</div>
+    </form>
+  </section>
+</main>

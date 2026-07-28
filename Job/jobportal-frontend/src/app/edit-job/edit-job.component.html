@@ -1,0 +1,61 @@
+<app-adminnavbar></app-adminnavbar>
+
+<main class="page">
+  <div class="page-head">
+    <div class="page-head-copy">
+      <span class="eyebrow">Job management</span>
+      <h1>Manage job listings</h1>
+      <p>Review active vacancies, update role details or remove listings that are no longer needed.</p>
+    </div>
+    <a routerLink="/managejob" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+      New job
+    </a>
+  </div>
+
+  <section class="table-wrap" *ngIf="categories.length > 0">
+    <div class="table-scroll">
+      <table class="grid">
+        <thead>
+          <tr>
+            <th>Reference</th>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Deadline</th>
+            <th>Fee</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of categories; let i = index">
+            <td>#{{i + 1}}</td>
+            <td>
+              <strong>{{item.jobTitle}}</strong>
+              <span class="table-subtext">{{item.department}}</span>
+            </td>
+            <td>{{item.location}}</td>
+            <td>{{item.deadLine}}</td>
+            <td><strong>{{item.applicationFee}}</strong></td>
+            <td><span class="chip" [ngClass]="item.category === 'premium' ? 'premium' : 'free'">{{item.category}}</span></td>
+            <td>
+              <div class="table-actions">
+                <button class="btn btn-outline btn-sm" type="button" (click)="editManage(item.id)">Edit</button>
+                <button class="btn btn-danger btn-sm" type="button" (click)="deleteJob(item.id)">Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="empty-state" *ngIf="categories.length === 0">
+    <div class="empty-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+    </div>
+    <h3>No job listings yet</h3>
+    <p>Create your first vacancy and it will appear here for future editing and management.</p>
+    <a routerLink="/managejob" class="btn btn-primary">Create first job</a>
+  </section>
+</main>

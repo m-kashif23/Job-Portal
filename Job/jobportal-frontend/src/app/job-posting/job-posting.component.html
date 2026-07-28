@@ -1,0 +1,52 @@
+<app-usernavbar></app-usernavbar>
+
+<main class="form-page">
+  <section class="form-card">
+    <div class="progress-steps" aria-label="Application progress">
+      <div class="progress-step active" data-step="1"><span>Profile</span></div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-step="2"><span>Payment</span></div>
+    </div>
+
+    <div class="form-card-head">
+      <div class="form-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M19 8v6"></path><path d="M22 11h-6"></path></svg>
+      </div>
+      <div>
+        <h2>Create your applicant profile</h2>
+        <p class="sub">Tell us how the employer can reach you. Payment is the final step.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+      <label for="applicantName">Full name</label>
+      <input type="text" id="applicantName" formControlName="applicantName" placeholder="Enter your full name" autocomplete="name"
+             [ngClass]="{ 'invalid-field': jobForm.get('applicantName').invalid && jobForm.get('applicantName').touched }">
+      <div class="err" *ngIf="jobForm.get('applicantName').hasError('required') && jobForm.get('applicantName').touched">Name is required.</div>
+
+      <label for="contactNumber">Contact number</label>
+      <input type="tel" id="contactNumber" formControlName="contactNumber" placeholder="e.g. +60123456789" autocomplete="tel"
+             [ngClass]="{ 'invalid-field': jobForm.get('contactNumber').invalid && jobForm.get('contactNumber').touched }">
+      <div class="err" *ngIf="jobForm.get('contactNumber').hasError('required') && jobForm.get('contactNumber').touched">Contact number is required.</div>
+      <div class="err" *ngIf="jobForm.get('contactNumber').hasError('pattern') && jobForm.get('contactNumber').touched">Enter 9–12 digits, optionally with a country code.</div>
+
+      <label for="email">Email address</label>
+      <input type="email" id="email" formControlName="email" placeholder="you@example.com" autocomplete="email"
+             [ngClass]="{ 'invalid-field': jobForm.get('email').invalid && jobForm.get('email').touched }">
+      <div class="form-text">This is fixed to the email you signed in with.</div>
+      <div class="err" *ngIf="jobForm.get('email').hasError('required') && jobForm.get('email').touched">Email is required.</div>
+      <div class="err" *ngIf="jobForm.get('email').hasError('email') && jobForm.get('email').touched">Enter a valid email.</div>
+
+      <label for="resume">Resume (optional)</label>
+      <input type="file" id="resume" accept=".pdf,.doc,.docx" (change)="onResumeSelected($event)">
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!jobForm.valid" class="btn btn-primary grow">
+          Continue to payment
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </button>
+        <button type="button" (click)="onCancel()" class="btn btn-ghost">Clear</button>
+      </div>
+    </form>
+  </section>
+</main>

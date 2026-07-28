@@ -1,0 +1,21 @@
+<header class="topbar">
+  <a class="brand" routerLink="/user" aria-label="Job Portal user dashboard">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="7" width="18" height="13" rx="2"></rect>
+        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        <path d="M3 12h18"></path>
+        <path d="M10 12v2h4v-2"></path>
+      </svg>
+    </span>
+    <span>Job Portal<span class="brand-subtitle">Candidate space</span></span>
+  </a>
+
+  <nav aria-label="Candidate navigation">
+    <a routerLink="/profile" routerLinkActive="active-link">Profile</a>
+    <a routerLink="/user" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+    <a routerLink="/homepage" routerLinkActive="active-link">Browse jobs</a>
+    <a routerLink="/application" routerLinkActive="active-link">Applications</a>
+    <a class="logout-link" (click)="logout()">Log out</a>
+  </nav>
+</header>

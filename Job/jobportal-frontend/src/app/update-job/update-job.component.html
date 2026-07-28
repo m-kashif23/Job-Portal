@@ -1,0 +1,67 @@
+<app-adminnavbar></app-adminnavbar>
+
+<main class="form-page">
+  <section class="form-card wide">
+    <div class="form-card-head">
+      <div class="form-icon" style="color:var(--secondary-dark);background:var(--secondary-soft)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+      </div>
+      <div>
+        <h2>Update job posting</h2>
+        <p class="sub">Review your changes carefully. The updated listing is published as soon as you save.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="manageForm" (ngSubmit)="updateJob()">
+      <div class="form-grid">
+        <div>
+          <label for="jobTitle">Job title</label>
+          <input type="text" id="jobTitle" formControlName="jobTitle"
+                 [ngClass]="{ 'invalid-field': manageForm.get('jobTitle').invalid && manageForm.get('jobTitle').touched }">
+        </div>
+        <div>
+          <label for="department">Department</label>
+          <input type="text" id="department" formControlName="department"
+                 [ngClass]="{ 'invalid-field': manageForm.get('department').invalid && manageForm.get('department').touched }">
+        </div>
+        <div>
+          <label for="location">Location</label>
+          <input type="text" id="location" formControlName="location"
+                 [ngClass]="{ 'invalid-field': manageForm.get('location').invalid && manageForm.get('location').touched }">
+        </div>
+        <div>
+          <label for="deadLine">Application deadline</label>
+          <input type="date" id="deadLine" formControlName="deadLine"
+                 [ngClass]="{ 'invalid-field': manageForm.get('deadLine').invalid && manageForm.get('deadLine').touched }">
+        </div>
+        <div class="full">
+          <label for="responsibility">Key responsibilities</label>
+          <textarea id="responsibility" formControlName="responsibility"
+                    [ngClass]="{ 'invalid-field': manageForm.get('responsibility').invalid && manageForm.get('responsibility').touched }"></textarea>
+        </div>
+        <div class="full">
+          <label for="qualification">Required qualifications</label>
+          <textarea id="qualification" formControlName="qualification"
+                    [ngClass]="{ 'invalid-field': manageForm.get('qualification').invalid && manageForm.get('qualification').touched }"></textarea>
+        </div>
+        <div>
+          <label for="category">Job category</label>
+          <select id="category" formControlName="category">
+            <option value="free">Free</option>
+            <option value="premium">Premium</option>
+          </select>
+        </div>
+        <div>
+          <label for="applicationFee">Application fee</label>
+          <input type="number" id="applicationFee" formControlName="applicationFee"
+                 [ngClass]="{ 'invalid-field': manageForm.get('applicationFee').invalid && manageForm.get('applicationFee').touched }">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!manageForm.valid" class="btn btn-primary">Save changes</button>
+        <a routerLink="/edit" class="btn btn-ghost">Cancel</a>
+      </div>
+    </form>
+  </section>
+</main>

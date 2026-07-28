@@ -1,0 +1,62 @@
+<app-usernavbar></app-usernavbar>
+
+<main class="page">
+  <section class="jobs-toolbar panel">
+    <div>
+      <span class="eyebrow">Free opportunities</span>
+      <h2>Open roles with no application fee</h2>
+      <p>Review the details and apply directly to the position that fits you.</p>
+    </div>
+    <span class="count-badge" *ngIf="categories.length > 0">{{categories.length}} open position{{categories.length === 1 ? '' : 's'}}</span>
+  </section>
+
+  <section class="job-grid" *ngIf="categories.length > 0">
+    <article class="job-card" *ngFor="let item of categories">
+      <div class="job-card-top">
+        <div class="job-logo">{{item.jobTitle ? item.jobTitle.charAt(0) : 'J'}}</div>
+        <span class="chip free">No fee</span>
+      </div>
+
+      <h3>{{item.jobTitle}}</h3>
+      <div class="job-meta-row">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          {{item.department}}
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          {{item.location}}
+        </span>
+      </div>
+
+      <div class="job-details">
+        <div class="job-detail">
+          <strong>What you will do</strong>
+          <p>{{item.responsibility}}</p>
+        </div>
+        <div class="job-detail">
+          <strong>What you will need</strong>
+          <p>{{item.qualification}}</p>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="deadline">Applications close<strong>{{item.deadLine}}</strong></div>
+        <button class="btn btn-primary" type="button" (click)="apply(item)" *ngIf="!hasApplied(item)">
+          Apply now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </button>
+        <span class="chip status" *ngIf="hasApplied(item)">Already applied</span>
+      </div>
+    </article>
+  </section>
+
+  <section class="empty-state" *ngIf="categories.length === 0">
+    <div class="empty-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+    </div>
+    <h3>No free jobs are open right now</h3>
+    <p>New opportunities may be added soon. You can also explore the featured premium category.</p>
+    <a routerLink="/premiumcategory" class="btn btn-outline">View premium jobs</a>
+  </section>
+</main>

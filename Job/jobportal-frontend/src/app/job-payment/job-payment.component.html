@@ -1,0 +1,61 @@
+<app-usernavbar></app-usernavbar>
+
+<main class="form-page">
+  <section class="form-card">
+    <div class="progress-steps" aria-label="Application progress">
+      <div class="progress-step complete" data-step="✓"><span>Profile</span></div>
+      <div class="progress-line"></div>
+      <div class="progress-step active" data-step="2"><span>Payment</span></div>
+    </div>
+
+    <div class="form-card-head">
+      <div class="form-icon" style="color:#a66b12;background:var(--accent-soft)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><path d="M2 10h20"></path></svg>
+      </div>
+      <div>
+        <h2>Complete your payment</h2>
+        <p class="sub">Your application is submitted once this final step is complete.</p>
+        <p class="sub" *ngIf="jobTitle">Application fee for <strong>{{ jobTitle }}</strong></p>
+      </div>
+    </div>
+
+    <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+      <label>Payment method</label>
+      <div class="radio-row">
+        <label><input type="radio" formControlName="modeOfPayment" value="Credit Card">Credit card</label>
+        <label><input type="radio" formControlName="modeOfPayment" value="Other">Other method</label>
+      </div>
+      <div class="err" *ngIf="jobForm.get('modeOfPayment').hasError('required') && jobForm.get('modeOfPayment').touched">Choose a payment method.</div>
+
+      <div class="form-section" *ngIf="isCard">
+        <div class="form-section-title">Card details</div>
+
+        <label for="cardHolderName">Cardholder name</label>
+        <input type="text" id="cardHolderName" formControlName="cardHolderName" placeholder="Name shown on card" autocomplete="cc-name"
+               [ngClass]="{ 'invalid-field': jobForm.get('cardHolderName').invalid && jobForm.get('cardHolderName').touched }">
+        <div class="err" *ngIf="jobForm.get('cardHolderName').hasError('required') && jobForm.get('cardHolderName').touched">Cardholder name is required.</div>
+
+        <label for="cardNumber">Card number</label>
+        <input type="text" id="cardNumber" formControlName="cardNumber" inputmode="numeric" placeholder="13–19 digits" autocomplete="off"
+               [ngClass]="{ 'invalid-field': jobForm.get('cardNumber').invalid && jobForm.get('cardNumber').touched }">
+        <div class="err" *ngIf="jobForm.get('cardNumber').hasError('required') && jobForm.get('cardNumber').touched">Card number is required.</div>
+        <div class="err" *ngIf="jobForm.get('cardNumber').hasError('pattern') && jobForm.get('cardNumber').touched">Enter a valid card number using digits only.</div>
+        <span class="form-text">This simulated payment validates the number only. Card details are not sent to or stored by the server.</span>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Payment summary</div>
+        <label for="totalAmount">Total application fee</label>
+        <input type="number" id="totalAmount" formControlName="totalAmount">
+        <span class="form-text">The amount is set by the selected job and cannot be changed.</span>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!jobForm.valid || processing" class="btn btn-primary grow">
+          {{ processing ? 'Processing payment...' : 'Pay and submit application' }}
+        </button>
+        <button type="button" (click)="onCancel()" class="btn btn-ghost">Clear</button>
+      </div>
+    </form>
+  </section>
+</main>

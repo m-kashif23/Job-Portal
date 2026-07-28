@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+
+<main class="auth-layout">
+  <aside class="auth-side">
+    <div class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M19 8v6"></path><path d="M22 11h-6"></path></svg>
+    </div>
+    <span class="eyebrow" style="color:#8f85ff">Start your journey</span>
+    <h1>Build your profile once. Apply with confidence.</h1>
+    <p>Create your secure account and unlock a clearer, faster way to discover roles and manage applications.</p>
+
+    <div class="auth-checks">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"></path></svg>Simple account creation</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"></path></svg>Access to all job categories</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"></path></svg>Organised application tracking</span>
+    </div>
+  </aside>
+
+  <section class="form-card">
+    <div class="form-card-head">
+      <div class="form-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M19 8v6"></path><path d="M22 11h-6"></path></svg>
+      </div>
+      <div>
+        <h2>Create your account</h2>
+        <p class="sub">Join the portal and start applying to opportunities.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="register()">
+      <label for="username">Username</label>
+      <input type="text" id="username" formControlName="username" placeholder="Choose a username" autocomplete="username"
+             [ngClass]="{ 'invalid-field': registrationForm.get('username').invalid && registrationForm.get('username').touched }">
+      <div class="err" *ngIf="registrationForm.get('username').hasError('required') && registrationForm.get('username').touched">Username is required.</div>
+
+      <label for="email">Email address</label>
+      <input type="email" id="email" formControlName="email" placeholder="you@example.com" autocomplete="email"
+             [ngClass]="{ 'invalid-field': registrationForm.get('email').invalid && registrationForm.get('email').touched }">
+      <div class="err" *ngIf="registrationForm.get('email').hasError('required') && registrationForm.get('email').touched">Email is required.</div>
+      <div class="err" *ngIf="registrationForm.get('email').hasError('email') && registrationForm.get('email').touched">Enter a valid email.</div>
+
+      <label for="mobileNumber">Mobile number</label>
+      <input type="tel" id="mobileNumber" formControlName="mobileNumber" placeholder="e.g. +60123456789" autocomplete="tel"
+             [ngClass]="{ 'invalid-field': registrationForm.get('mobileNumber').invalid && registrationForm.get('mobileNumber').touched }">
+      <div class="err" *ngIf="registrationForm.get('mobileNumber').hasError('required') && registrationForm.get('mobileNumber').touched">Mobile number is required.</div>
+      <div class="err" *ngIf="registrationForm.get('mobileNumber').hasError('pattern') && registrationForm.get('mobileNumber').touched">Enter 9–12 digits, optionally with a country code.</div>
+
+      <div class="form-grid">
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" placeholder="Create a password" autocomplete="new-password"
+                 [ngClass]="{ 'invalid-field': registrationForm.get('password').invalid && registrationForm.get('password').touched }">
+          <div class="err" *ngIf="registrationForm.get('password').hasError('required') && registrationForm.get('password').touched">Password is required.</div>
+          <div class="err" *ngIf="registrationForm.get('password').hasError('pattern') && registrationForm.get('password').touched">Include at least one capital letter and one digit.</div>
+        </div>
+
+        <div>
+          <label for="cpassword">Confirm password</label>
+          <input type="password" id="cpassword" formControlName="cpassword" placeholder="Repeat password" autocomplete="new-password"
+                 [ngClass]="{ 'invalid-field': registrationForm.hasError('mismatch') && registrationForm.get('cpassword').touched }">
+          <div class="err" *ngIf="registrationForm.hasError('mismatch') && registrationForm.get('cpassword').touched">Passwords do not match.</div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary grow" id="RegisterButton">
+          Create my account
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </button>
+      </div>
+
+      <div class="alert-error" *ngIf="msg">{{errorMsg}}</div>
+    </form>
+
+    <p class="form-foot">Already registered? <a routerLink="/login">Sign in instead</a></p>
+  </section>
+</main>

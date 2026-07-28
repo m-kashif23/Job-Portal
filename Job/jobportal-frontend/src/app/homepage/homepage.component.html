@@ -1,0 +1,37 @@
+<app-usernavbar></app-usernavbar>
+
+<main class="page">
+  <div class="page-head">
+    <div class="page-head-copy">
+      <span class="eyebrow">Opportunity hub</span>
+      <h1>Choose how you want to explore</h1>
+      <p>Browse accessible free listings or discover highlighted premium opportunities.</p>
+    </div>
+  </div>
+
+  <section class="cat-tiles" aria-label="Job categories">
+    <a class="cat-tile" routerLink="/freecategory">
+      <div class="cat-top">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
+        </div>
+        <span class="chip free">No fee</span>
+      </div>
+      <h3>Free opportunities</h3>
+      <p>Apply to open roles at no cost. Complete your profile once and submit your application directly.</p>
+      <span class="cat-link">Browse free jobs <span>→</span></span>
+    </a>
+
+    <a class="cat-tile premium-tile" routerLink="/premiumcategory">
+      <div class="cat-top">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3 7 7 .5-5.4 4.6 1.8 7.2L12 17l-6.4 4.3 1.8-7.2L2 9.5 9 9Z"></path></svg>
+        </div>
+        <span class="chip premium">Featured</span>
+      </div>
+      <h3>Premium opportunities</h3>
+      <p>Explore featured roles with a clearly displayed application fee and a guided payment step.</p>
+      <span class="cat-link">Browse premium jobs <span>→</span></span>
+    </a>
+  </section>
+</main>
